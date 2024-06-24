@@ -1,0 +1,162 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-02-12 18:48+0300\n"
+"PO-Revision-Date: 2024-02-12 18:48+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+
+# commands
+msgid "START_COMMAND"
+msgstr "Начало работы, главное меню"
+
+
+msgid "CANCEL_COMMAND"
+msgstr "Сбросить текущую цепочку действий"
+
+
+msgid "SEND_COMMAND"
+msgstr "Запустить рассылку"
+
+
+msgid "STATS_COMMAND"
+msgstr "Получить Excel статистику"
+
+
+# buttons
+msgid "YES_BUTTON"
+msgstr "Да"
+
+
+msgid "NO_BUTTON"
+msgstr "Нет"
+
+
+msgid "CONFIRM_BUTTON"
+msgstr "✅ Подтвердить"
+
+
+msgid "BACK_BUTTON"
+msgstr "🔙  Назад"
+
+
+msgid "BACK_PAGER"
+msgstr "◀️"
+
+
+msgid "FORWARD_PAGER"
+msgstr "▶️"
+
+
+msgid "MAILING_BUTTON"
+msgstr "Запустить"
+
+
+msgid "PROFILE_BUTTON"
+msgstr "👤 Профиль"
+
+
+msgid "P2P_BUTTON"
+msgstr "💸 P2P покупка/продажа фишек"
+
+
+msgid "PPPOKER_MENU_BUTTON"
+msgstr "ℹ️ PPPoker Информация"
+
+
+msgid "LINK_TO_CHANNEL_BUTTON"
+msgstr "💬 Наш канал"
+
+
+msgid "LINK_TO_HELP_BUTTON"
+msgstr "❓ Помощь"
+
+
+msgid "ALREADY_REGISTERED_BUTTON"
+msgstr "✅ Я зарегистрировался"
+
+
+
+msgid "DELETE_BUTTON"
+msgstr "❌ Удалить"
+
+
+msgid "APPROVE_BUTTON"
+msgstr "✅ Одобрить"
+
+
+msgid "REJECT_BUTTON"
+msgstr "❌ Отклонить"
+
+
+msgid "MENU_BUTTON"
+msgstr "Меню"
+
+
+msgid "PAID_BUTTON"
+msgstr "Оплатил 👍"
+
+
+msgid "OK_BUTTON"
+msgstr "👍 Все верно"
+
+
+msgid "CANCEL_BUTTON"
+msgstr "❌ Отмена"
+
+
+msgid "ADD_BUTTON"
+msgstr "➕ Добавить"
+
+
+# texts
+msgid "PICK_ACTION"
+msgstr "Выберите действие с помощью кнопок 👇"
+
+
+msgid "CANCEL_MSG"
+msgstr "Никакие цепочки процессов не запущены. Отменять нечего."
+
+
+msgid "CANCELED"
+msgstr "Действие отменено"
+
+
+msgid "NEW_ADMIN_TEXT"
+msgstr "Вам выданы права администратора"
+
+
+msgid "INPUT_MAILING_CONTENT"
+msgstr "ℹ️ Укажите текст и/или фото рассылки"
+
+
+msgid "CONFIRM_MAILING"
+msgstr "Запустить рассылку всем пользователям?\n\n"
+
+"<i>/cancel для отмены</i>"
+
+
+msgid "NEW_ADMIN_TEXT"
+msgstr "Вам выданы права администратора"
+
+
+msgid "WELCOME_MSG"
+msgstr "Здравствуйте"
+
+
+msgid "ALREADY_REGISTERED"
+msgstr "👉 Главное меню"
