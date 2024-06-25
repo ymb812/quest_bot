@@ -25,15 +25,6 @@ async def set_admin_commands(bot: Bot, scope: BotCommandScopeChat):
             command='start',
             description=_('START_COMMAND')
         ),
-        BotCommand(
-            command='cards',
-            description=_('CARDS_COMMAND')
-        ),
-        BotCommand(
-            command='send',
-            description=_('SEND_COMMAND')
-        ),
     ]
-
 
     await bot.set_my_commands(commands=commands, scope=scope)

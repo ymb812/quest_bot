@@ -61,10 +61,11 @@ class Quest(Model):
     id = fields.IntField(pk=True)
     deeplink = fields.CharField(max_length=64)
     question = fields.TextField()
-    answers = fields.JSONField()  # {'a': '...', 'b': '...', 'c': '...', 'd': '...'}
-    correct_answer = fields.CharField(max_length=1)  # 'a', 'b', 'c', 'd'
+    answers = fields.JSONField(null=True)  # {'a': '...', 'b': '...', 'c': '...', 'd': '...'}
+    correct_answer = fields.CharField(max_length=1, null=True)  # 'a', 'b', 'c', 'd'
     photo_file_id = fields.CharField(max_length=256, null=True)
     created_at = fields.DatetimeField(auto_now_add=True)
+    final_phrase = fields.TextField()
 
 
 class UserQuest(Model):
