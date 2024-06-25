@@ -7,6 +7,7 @@ class BotSettings(BaseModel):
     admin_password: SecretStr = fields.Field(max_length=100, alias='ADMIN_PASSWORD')
     welcome_post_id: int = fields.Field(alias='WELCOME_POST_ID')
     channel_id: int = fields.Field(alias='CHANNEL_ID')
+    start_deeplink: str = fields.Field(alias='START_DEEPLINK')
 
 
 class Dialogues(BaseModel):

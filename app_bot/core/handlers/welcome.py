@@ -1,12 +1,11 @@
 import logging
 from aiogram import Bot, types, Router, F
-from aiogram.fsm.context import FSMContext
 from aiogram.filters import Command, StateFilter
 from aiogram_dialog import DialogManager, StartMode
 from core.states.main_menu import MainMenuStateGroup
 from core.utils.texts import set_user_commands, set_admin_commands, _
 from core.database.models import User, Quest, UserQuest, Post
-from core.keyboards.inline import answers_kb, comeback_kb, followed_kb
+from core.keyboards.inline import answers_kb, comeback_kb, followed_kb, go_to_main_kb
 from settings import settings
 
 
@@ -15,7 +14,7 @@ router = Router(name='Start router')
 
 
 @router.message(Command(commands=['start']), StateFilter(None))
-async def start_handler(message: types.Message, bot: Bot, state: FSMContext, dialog_manager: DialogManager):
+async def start_handler(message: types.Message, bot: Bot, dialog_manager: DialogManager):
     try:
         await dialog_manager.reset_stack()
     except:
@@ -37,7 +36,7 @@ async def start_handler(message: types.Message, bot: Bot, state: FSMContext, dia
     else:
         await set_user_commands(bot=bot, scope=types.BotCommandScopeChat(chat_id=message.from_user.id))
 
-    if len(message.text.split(' ')) == 2:
+    if len(message.text.split(' ')) == 2 and settings.start_deeplink not in message.text:
         deeplink = message.text.split(' ')[-1]
         quest = await Quest.get_or_none(deeplink=deeplink)
         if quest:
@@ -50,7 +49,7 @@ async def start_handler(message: types.Message, bot: Bot, state: FSMContext, dia
 
 async def quest_handler(message: types.Message, bot: Bot, quest: Quest):
     # check if the user completed the previous quest
-    if quest.id != 1:
+    if quest.id > 1:
         user_quest_before = await UserQuest.filter(quest_id=quest.id - 1, user_id=message.from_user.id)
         if not user_quest_before:
             await message.answer(text='Сначала отсканируйте предыдущий QR и выполните задание, а потом вернитесь сюда')
@@ -82,15 +81,12 @@ async def quest_answer_handler(callback: types.CallbackQuery, bot: Bot):
         )
 
     else:
-        #if quest_id != 6:
         welcome_post = await Post.get(id=settings.welcome_post_id)
         await callback.message.answer_photo(
             caption=quest.final_phrase,
             photo=welcome_post.photo_file_id,
+            reply_markup=go_to_main_kb()
         )
-        # else:
-        #     final_quest = await Quest.get_or_none(id=7)
-        #     await callback.message.answer(text=final_quest.question, reply_markup=followed_kb())
 
         # add log
         await UserQuest.create(
@@ -125,4 +121,9 @@ async def followed_handler(callback: types.CallbackQuery, bot: Bot):
         await callback.message.delete()
         await callback.message.answer(text=quest.question, reply_markup=followed_kb())
     else:
-        await callback.message.answer(text=quest.final_phrase)
+        await callback.message.answer(text=quest.final_phrase, reply_markup=go_to_main_kb())
+
+
+@router.callback_query(F.data == 'go_to_main_menu')
+async def followed_handler(callback: types.CallbackQuery, bot: Bot, dialog_manager: DialogManager):
+    await dialog_manager.start(state=MainMenuStateGroup.menu, mode=StartMode.RESET_STACK)

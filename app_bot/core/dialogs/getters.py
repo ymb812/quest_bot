@@ -1,13 +1,7 @@
-from aiogram_dialog import DialogManager
 from aiogram.enums import ContentType
 from aiogram_dialog.api.entities import MediaAttachment, MediaId
-from core.database.models import Post, User, Quest, UserQuest
+from core.database.models import Post
 from settings import settings
-
-
-async def get_input_data(dialog_manager: DialogManager, **kwargs):
-    data = dialog_manager.dialog_data
-    return {'data': data}
 
 
 async def get_menu_media(**kwargs):
@@ -18,10 +12,3 @@ async def get_menu_media(**kwargs):
         'media_content': media_content,
         'msg_text': welcome_post.text,
     }
-
-
-async def get_quests(dialog_manager: DialogManager, **kwargs):
-    return {
-        'quests': await Quest.all(),
-    }
-
