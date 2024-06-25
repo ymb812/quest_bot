@@ -14,6 +14,10 @@ async def set_user_commands(bot: Bot, scope: BotCommandScopeChat):
             command='start',
             description=_('START_COMMAND')
         ),
+        BotCommand(
+            command='help',
+            description='Помощь'
+        ),
     ]
 
     await bot.set_my_commands(commands=commands, scope=scope)
@@ -24,6 +28,10 @@ async def set_admin_commands(bot: Bot, scope: BotCommandScopeChat):
         BotCommand(
             command='start',
             description=_('START_COMMAND')
+        ),
+        BotCommand(
+            command='help',
+            description='Помощь'
         ),
     ]
 

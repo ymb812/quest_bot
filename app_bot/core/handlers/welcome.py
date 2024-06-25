@@ -125,5 +125,10 @@ async def followed_handler(callback: types.CallbackQuery, bot: Bot):
 
 
 @router.callback_query(F.data == 'go_to_main_menu')
-async def followed_handler(callback: types.CallbackQuery, bot: Bot, dialog_manager: DialogManager):
+async def followed_handler(callback: types.CallbackQuery, dialog_manager: DialogManager):
     await dialog_manager.start(state=MainMenuStateGroup.menu, mode=StartMode.RESET_STACK)
+
+
+@router.message(Command(commands=['help']))
+async def help_handler(message: types.Message, dialog_manager: DialogManager):
+    await dialog_manager.start(state=MainMenuStateGroup.help, mode=StartMode.RESET_STACK)
