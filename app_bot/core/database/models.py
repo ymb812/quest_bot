@@ -30,7 +30,7 @@ class User(Model):
                           is_premium: bool):
         user = await cls.filter(user_id=user_id).first()
         if user is None:
-            await cls.create(
+            user = await cls.create(
                 user_id=user_id,
                 first_name=first_name,
                 last_name=last_name,
@@ -47,6 +47,8 @@ class User(Model):
                 is_premium=is_premium,
                 updated_at=datetime.now()
             )
+
+        return user
 
     @classmethod
     async def set_status(cls, user_id: int, status: str | None):

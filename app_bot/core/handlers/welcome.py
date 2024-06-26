@@ -20,17 +20,36 @@ async def start_handler(message: types.Message, bot: Bot, dialog_manager: Dialog
     except:
         pass
 
-    # add basic info to db
-    await User.update_data(
-        user_id=message.from_user.id,
-        first_name=message.from_user.first_name,
-        last_name=message.from_user.last_name,
-        username=message.from_user.username,
-        language_code=message.from_user.language_code,
-        is_premium=message.from_user.is_premium,
-    )
+    user = await User.get_or_none(user_id=message.from_user.id)
 
-    user = await User.get(user_id=message.from_user.id)
+    # send welcome msg to new user with info to find QR
+    if not user:
+        # add basic info to db
+        user = await User.update_data(
+            user_id=message.from_user.id,
+            first_name=message.from_user.first_name,
+            last_name=message.from_user.last_name,
+            username=message.from_user.username,
+            language_code=message.from_user.language_code,
+            is_premium=message.from_user.is_premium,
+        )
+
+        # check if user scanned 2-7 tasks => send msg
+        if len(message.text.split(' ')) == 2 and settings.start_deeplink not in message.text:
+            deeplink = message.text.split(' ')[-1]
+            quest = await Quest.get_or_none(deeplink=deeplink)
+            if quest.id > 1:
+                welcome_post = await Post.get(id=settings.welcome_post_id)
+                await message.answer_photo(
+                    caption='Привет!\n\n'
+                            'Поучаствуй в нашем квесте, чтобы узнать больше о добрых делах. На табличках на территории фестиваля можно найти небольшие тексты-подсказки. Чтобы начать, отправляйся к первой табличке и сканируй QR-код на ней. Вот карта площадки, чтобы точно не заблудиться!',
+                    photo=welcome_post.photo_file_id,
+                )
+                return
+
+        else:  # unless continue
+            pass
+
     if user.status == 'admin':
         await set_admin_commands(bot=bot, scope=types.BotCommandScopeChat(chat_id=message.from_user.id))
     else:
