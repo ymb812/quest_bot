@@ -52,7 +52,9 @@ async def quest_handler(message: types.Message, bot: Bot, quest: Quest):
     if quest.id > 1:
         user_quest_before = await UserQuest.filter(quest_id=quest.id - 1, user_id=message.from_user.id)
         if not user_quest_before:
-            await message.answer(text='Сначала отсканируйте предыдущий QR и выполните задание, а потом вернитесь сюда')
+            await message.answer(
+                text='Упс...кажется, ты отсканировал не тот QR-код, пропустив предыдущие таблички. Для нас очень важно, чтобы ты ответил на все вопросы по порядку, поэтому постарайся найти нужную табличку ❤️'
+            )
             return
 
     # send final quest
