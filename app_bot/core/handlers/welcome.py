@@ -106,7 +106,7 @@ async def quest_answer_handler(callback: types.CallbackQuery, bot: Bot):
         await callback.message.answer_photo(
             caption=quest.final_phrase,
             photo=welcome_post.photo_file_id,
-            reply_markup=go_to_main_kb()
+            #reply_markup=go_to_main_kb()
         )
 
         # add log
@@ -142,7 +142,10 @@ async def followed_handler(callback: types.CallbackQuery, bot: Bot):
         await callback.message.delete()
         await callback.message.answer(text=quest.question, reply_markup=followed_kb())
     else:
-        await callback.message.answer(text=quest.final_phrase, reply_markup=go_to_main_kb())
+        await callback.message.answer(
+            text=quest.final_phrase,
+            #reply_markup=go_to_main_kb(),
+        )
 
 
 @router.callback_query(F.data == 'go_to_main_menu')
